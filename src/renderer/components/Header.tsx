@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Navbar, Alignment, ButtonGroup, Button, Dialog } from '@blueprintjs/core';
+import { Navbar, Alignment, ButtonGroup, Button } from '@blueprintjs/core';
 import { LoginDialog } from './LoginDialog';
 
 export interface HeaderProps {}

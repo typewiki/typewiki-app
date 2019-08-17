@@ -1,11 +1,14 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 
 import { CounterState, counterReducer } from './counterReducer';
 
 export interface RootState {
-    counter: CounterState;
+  counter: CounterState;
+  form: {};
 }
 
 export const rootReducer = combineReducers<RootState | undefined>({
-    counter: counterReducer
+  counter: counterReducer,
+  form: formReducer
 });
