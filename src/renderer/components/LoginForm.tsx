@@ -30,6 +30,7 @@ export const LoginForm: React.FC<InjectedFormProps> = ({ handleSubmit }) => {
               <InputGroup
                 autoFocus={true}
                 id="user-name"
+                intent={!!touched && !!error ? Intent.DANGER : Intent.PRIMARY}
                 leftIcon={IconNames.USER}
                 placeholder="Введите имя вашей учётной записи..."
                 type="text"
