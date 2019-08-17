@@ -89,6 +89,7 @@
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
     "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
@@ -137,9 +138,18 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
+    "@blueprintjs/core": "^3.18.0",
+    "@types/classnames": "^2.2.9",
+    "brace": "^0.11.1",
+    "classnames": "^2.2.6",
+    "normalize.css": "^8.0.1",
     "react": "^16.8.6",
+    "react-ace": "^7.0.2",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "redux-actions": "^2.6.5",
+    "redux-form": "^8.2.6",
+    "redux-saga": "^1.0.5"
   }
 }
