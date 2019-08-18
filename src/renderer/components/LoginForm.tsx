@@ -5,10 +5,11 @@ import './LoginForm.scss';
 import { InjectedFormProps } from 'redux-form';
 import { required } from 'redux-form-validators';
 import { FormGroupField } from './FormGroupField';
+import { submitFormHandler } from '../routines';
 
 export const LoginForm: React.FC<InjectedFormProps> = ({ handleSubmit }) => {
   return (
-    <form className="login-form" onSubmit={handleSubmit}>
+    <form className="login-form" onSubmit={handleSubmit(submitFormHandler)}>
       <FormGroupField
         autoFocus={true}
         label="Имя учётной записи"

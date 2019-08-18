@@ -32,6 +32,7 @@ function onChange(newValue: any) {
 
 import { ContextMenuTarget, Menu, MenuItem } from '@blueprintjs/core';
 import { Header } from './Header';
+import store from '../store';
 
 @ContextMenuTarget
 class RightClickMe extends React.Component<{}, {}> {
@@ -61,6 +62,8 @@ const Application = () => {
 }
 `);
 
+  const action = (type: any) => store.dispatch({ type });
+
   return (
     <div>
       {/*<ButtonGroup minimal={true}>*/}
@@ -84,6 +87,9 @@ const Application = () => {
         name="UNIQUE_ID_OF_DIV"
         editorProps={{ $blockScrolling: true }}
       />
+
+      <Button icon="add" onClick={() => action('INCREMENT')} />
+      <Button icon="remove" onClick={() => action('INCREMENT_ASYNC')} />
     </div>
   );
 };

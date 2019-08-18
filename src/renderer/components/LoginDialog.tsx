@@ -15,7 +15,7 @@ export const LoginDialog: React.FC<ILoginDialogProps> = ({ isOpen, onClose }) =>
       onClose={onClose}
     >
       <div className={Classes.DIALOG_BODY}>
-        <LoginForm onSubmit={values => console.log(values)} />
+        <LoginForm />
       </div>
     </Dialog>
   );
