@@ -1193,6 +1193,13 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
+"@types/ramda@^0.26.19":
+  version "0.26.19"
+  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.26.19.tgz#400580597566c016e9743f17c1c48bf4671cda81"
+  integrity sha512-lJuMZDXqZ8W2hl0Gz+wEPUhXcf/tZRuaO5vrxFD3Dv2XMqgTZVw+bvfS6iQAsio9XQV+uhkggtT4eLhDmUpI5g==
+  dependencies:
+    ts-toolbelt "^3.2.22"
+
 "@types/react-dom@^16.8.4":
   version "16.8.5"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.8.5.tgz#3e3f4d99199391a7fb40aa3a155c8dd99b899cbd"
@@ -8197,6 +8204,11 @@ querystringify@^2.1.1:
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.1.tgz#60e5a5fd64a7f8bfa4d2ab2ed6fdf4c85bad154e"
   integrity sha512-w7fLxIRCRT7U8Qu53jQnJyPkYZIaR4n5151KMfcJlO/A9397Wxb1amJvROTK6TOnp7PfoAmg/qXiNHI+08jRfA==
 
+ramda@^0.26.1:
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.26.1.tgz#8d41351eb8111c55353617fc3bbffad8e4d35d06"
+  integrity sha512-hLWjpy7EnsDBb0p+Z3B7rPi3GDeRG5ZtiI33kJhTt+ORCd38AbAIjB/9zRIUoeTbE/AVX5ZkU7m6bznsvrf8eQ==
+
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/randombytes/-/randombytes-2.1.0.tgz#df6f84372f0270dc65cdf6291349ab7a473d4f2a"
@@ -8272,6 +8284,11 @@ react-hot-loader@^4.8.8:
     react-lifecycles-compat "^3.0.4"
     shallowequal "^1.1.0"
     source-map "^0.7.3"
+
+react-id-generator@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-id-generator/-/react-id-generator-2.0.0.tgz#64f4d9dcb9493c3ba9c0de036380acb3b4fe358b"
+  integrity sha512-MU07dynz2xNWSHHaKSk9cDZh6JkfbsM1lSfOCTl9TnEKX2l+mgf4Q6pn1GVKM4KxTVN3AeCxky09zdaNXE16GA==
 
 react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6, react-is@^16.9.0:
   version "16.9.0"
@@ -8494,6 +8511,13 @@ redux-form@^8.2.6:
     react-lifecycles-compat "^3.0.4"
   optionalDependencies:
     immutable "3.8.2"
+
+redux-saga-routines@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/redux-saga-routines/-/redux-saga-routines-3.2.0.tgz#fd77b8aebb696970f78577c1456100b41a6d843f"
+  integrity sha512-dUBe7mvVcIRCh1lL3g8B6PCfEwxB02X/fz/SgXLMocWjdskYd1NaOhTg3vUQVef6n6kLVJIx+V/bYccNe1y2jA==
+  dependencies:
+    redux-actions "^2.6.5"
 
 redux-saga@^1.0.5:
   version "1.0.5"
@@ -9979,6 +10003,11 @@ ts-jest@^24.0.2:
     resolve "1.x"
     semver "^5.5"
     yargs-parser "10.x"
+
+ts-toolbelt@^3.2.22:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/ts-toolbelt/-/ts-toolbelt-3.8.0.tgz#bda726025341a5677d49be04fac536d82dfaaf61"
+  integrity sha512-Gjlx1VZR91Ll7FWT0vnJawC/RH6e4Uj7w6605QaIwC7djhkpR765ju1V+pZiejwjf3JFOzMJi78pZ0mfOzVjMg==
 
 tslib@1.9.0:
   version "1.9.0"

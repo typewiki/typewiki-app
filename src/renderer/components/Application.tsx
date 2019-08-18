@@ -74,7 +74,7 @@ const Application = () => {
       {/*    <Button icon="remove" />*/}
       {/*</ButtonGroup>*/}
       {/*<RightClickMe />*/}
-      <Header/>
+      <Header />
       <AceEditor
         enableBasicAutocompletion={true}
         enableLiveAutocompletion={true}
