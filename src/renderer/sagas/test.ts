@@ -8,7 +8,7 @@ function* requestWatcherSaga() {
   yield takeEvery(fetchData.TRIGGER, fetchDataFromServer)
 }
 
-function* fetchDataFromServer() {
+function* fetchDataFromServer(): Generator {
   try {
     // trigger request action
     yield put(fetchData.request());

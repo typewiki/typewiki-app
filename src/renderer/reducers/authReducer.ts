@@ -1,4 +1,5 @@
 import { fetchData } from '../routines';
+import { createReducer } from 'typesafe-actions';
 
 const initialState = {
   data: null,
@@ -33,3 +34,27 @@ export default function exampleReducer(state = initialState, action: any) {
       return state;
   }
 }
+
+// const x = createReducer({
+//   data: null,
+//   loading: false,
+//   error: null
+// })
+//   .handleAction(fetchData.TRIGGER, (state, action) => {
+//     return {
+//       ...state,
+//       loading: true
+//     }
+//   })
+//   .handleAction(fetchData.SUCCESS, (state, action) => {
+//     return {
+//       ...state,
+//       loading: true
+//     }
+//   })
+//   .handleAction(fetchData.TRIGGER, (state, action) => {
+//     return {
+//       ...state,
+//       loading: true
+//     }
+//   })
