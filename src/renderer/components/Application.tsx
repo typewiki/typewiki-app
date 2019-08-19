@@ -33,6 +33,8 @@ function onChange(newValue: any) {
 import { ContextMenuTarget, Menu, MenuItem } from '@blueprintjs/core';
 import { Header } from './Header';
 import store from '../store';
+import { fetchData } from '../routines';
+import { connect } from 'react-redux';
 
 @ContextMenuTarget
 class RightClickMe extends React.Component<{}, {}> {
@@ -56,7 +58,8 @@ class RightClickMe extends React.Component<{}, {}> {
   }
 }
 
-const Application = () => {
+// @ts-ignore
+const Application = ({ fetchData })  => {
   const [code, setCode] = useState(`function add(a, b) {
   return a + b;
 }
@@ -89,9 +92,13 @@ const Application = () => {
       />
 
       <Button icon="add" onClick={() => action('INCREMENT')} />
-      <Button icon="remove" onClick={() => action('INCREMENT_ASYNC')} />
+      <Button icon="remove" onClick={() => fetchData()} />
     </div>
   );
 };
 
-export default hot(Application);
+const mapDispatchToProps = {
+  fetchData,
+}
+
+export default hot(connect(null, mapDispatchToProps)(Application));

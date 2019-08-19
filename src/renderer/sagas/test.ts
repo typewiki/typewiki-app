@@ -1,40 +1,50 @@
-/* eslint-disable no-constant-condition */
-
 import api from '../services/api';
-import * as queryString from 'query-string';
 
-import fetch from 'node-fetch';
-import axios from 'axios';
+import { put, takeEvery } from 'redux-saga/effects';
+import { fetchData } from '../routines';
 
-import { put, takeEvery, delay } from 'redux-saga/effects';
+function* requestWatcherSaga() {
+  // run fetchDataFromServer on every trigger action
+  yield takeEvery(fetchData.TRIGGER, fetchDataFromServer)
+}
+
+function* fetchDataFromServer() {
+  try {
+    // trigger request action
+    yield put(fetchData.request());
+    // perform request to '/some_url' to fetch some data
+    const response = yield api.request({
+      params: {
+        action: 'query',
+        meta: 'tokens',
+        type: 'login',
+        format: 'json'
+      },
+    });
+    // if request successfully finished
+    yield put(fetchData.success(response.data));
+  } catch (error) {
+    // if request failed
+    yield put(fetchData.failure(error.message));
+  } finally {
+    // trigger fulfill action
+    yield put(fetchData.fulfill());
+  }
+}
 
 export function* incrementAsync() {
-  yield delay(1000);
-  // const query = queryString.stringify({
-  //   action: 'query',
-  //   meta: 'tokens',
-  //   type: 'login',
-  //   format: 'json',
-  // });
-  // fetch(`https://en.wikipedia.org/w/api.php?${query}`)
-  //   .then((res: { json: () => void }) => {
-  //     console.log({ res })
-  //     res.json()
-  //   })
-  //   .then((json: any) => console.log(json));
-  const xxx = yield axios.get(`https://en.wikipedia.org/w/api.php`, {
+  const xxx = yield api.request({
     params: {
       action: 'query',
       meta: 'tokens',
       type: 'login',
       format: 'json'
     },
-    withCredentials: true
   });
   console.log({ xxx });
   yield put({ type: 'INCREMENT' });
 }
 
 export default function* rootSaga() {
-  yield takeEvery('INCREMENT_ASYNC', incrementAsync);
+  yield takeEvery(fetchData.TRIGGER, fetchDataFromServer)
 }
