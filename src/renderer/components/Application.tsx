@@ -33,8 +33,10 @@ function onChange(newValue: any) {
 import { ContextMenuTarget, Menu, MenuItem } from '@blueprintjs/core';
 import { Header } from './Header';
 import store from '../store';
-import { fetchData } from '../routines';
+import { clientLogin } from '../routines';
 import { connect } from 'react-redux';
+
+const queryString = require('query-string');
 
 @ContextMenuTarget
 class RightClickMe extends React.Component<{}, {}> {
@@ -58,8 +60,10 @@ class RightClickMe extends React.Component<{}, {}> {
   }
 }
 
+import fetch from 'electron-fetch'
+
 // @ts-ignore
-const Application = ({ fetchData })  => {
+const Application = ({ clientLogin }) => {
   const [code, setCode] = useState(`function add(a, b) {
   return a + b;
 }
@@ -91,14 +95,59 @@ const Application = ({ fetchData })  => {
         editorProps={{ $blockScrolling: true }}
       />
 
-      <Button icon="add" onClick={() => action('INCREMENT')} />
-      <Button icon="remove" onClick={() => fetchData()} />
+      <Button
+        icon="add"
+        onClick={() => {
+          const requestApi = {
+            method: 'POST',
+            protocol: 'https:',
+            hostname: 'ru.wikipedia.org',
+            path: '/w/api.php',
+          };
+
+          let body = ''
+
+          const { remote } = require('electron');
+          const request = remote.net.request(requestApi);
+
+
+          request.on('response', response => {
+            console.log(`STATUS: ${response.statusCode}`);
+            console.log(`HEADERS: ${JSON.stringify(response.headers)}`);
+            response.on('end', () => {
+              console.log('No more data in response.');
+              console.log({ body })
+            });
+            response.on('data', chunk => {
+              console.log(`BODY: ${chunk}`);
+              body += chunk.toString();
+            });
+          });
+          request.write(queryString.stringify({ action: 'clientlogin', format: 'json' }));
+          request.end();
+
+        }}
+      />
+      <Button
+        icon="remove"
+        onClick={() => {
+          // fetch('http://httpbin.org/post', { method: 'POST', body: 'format=json' })
+          //   .then(res => res.json())
+          //   .then(json => console.log(json))
+          //clientLogin();
+        }}
+      />
     </div>
   );
 };
 
 const mapDispatchToProps = {
-  fetchData,
-}
+  clientLogin
+};
 
-export default hot(connect(null, mapDispatchToProps)(Application));
+export default hot(
+  connect(
+    null,
+    mapDispatchToProps
+  )(Application)
+);

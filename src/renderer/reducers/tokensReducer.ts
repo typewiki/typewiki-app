@@ -1,4 +1,4 @@
-import { clientLogin } from '../routines';
+import { fetchTokens } from '../routines';
 
 const initialState = {
   data: null,
@@ -6,24 +6,24 @@ const initialState = {
   error: null
 };
 
-export default function exampleReducer(state = initialState, action: any) {
+export default function tokensReducer(state = initialState, action: any) {
   switch (action.type) {
-    case clientLogin.TRIGGER:
+    case fetchTokens.TRIGGER:
       return {
         ...state,
         loading: true
       };
-    case clientLogin.SUCCESS:
+    case fetchTokens.SUCCESS:
       return {
         ...state,
-        data: action.payload
+        data: action.payload.query.tokens
       };
-    case clientLogin.FAILURE:
+    case fetchTokens.FAILURE:
       return {
         ...state,
         error: action.payload
       };
-    case clientLogin.FULFILL:
+    case fetchTokens.FULFILL:
       return {
         ...state,
         loading: false

@@ -22,4 +22,5 @@ const render = (Component: () => JSX.Element) => {
   );
 };
 
+// @ts-ignore
 render(Application);

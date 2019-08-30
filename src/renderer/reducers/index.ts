@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import testReducer from './test';
 import authReducer from './authReducer';
+import tokensReducer from './tokensReducer';
 
 // import { CounterState, counterReducer } from './counterReducer';
 
@@ -10,6 +11,7 @@ export interface RootState {
   form: {};
   test: any;
   auth: any;
+  tokens: any;
 }
 
 export const rootReducer = combineReducers<RootState | undefined>({
@@ -17,4 +19,5 @@ export const rootReducer = combineReducers<RootState | undefined>({
   form: formReducer,
   test: testReducer,
   auth: authReducer,
+  tokens: tokensReducer,
 });
