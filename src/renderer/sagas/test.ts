@@ -1,88 +1,55 @@
-import api from '../services/api';
-import axios from 'axios';
+import * as api from '../services/api/index';
 
-import { put, takeEvery, all, fork, select, call } from 'redux-saga/effects';
-import { clientLogin, fetchTokens } from '../routines';
-import { ClientRequest } from 'electron'
+import { put, takeLatest, all, fork, call } from 'redux-saga/effects';
+import { clientLogin, logout } from '../routines';
+import { Routine } from 'redux-saga-routines';
 
 function* requestWatcherSaga(): Generator {
-  // run fetchDataFromServer on every trigger action
-  yield takeEvery(clientLogin.TRIGGER, fetchDataFromServer);
+  yield takeLatest(clientLogin.TRIGGER, requestZZZ);
+  yield takeLatest(logout.TRIGGER, requestYYY);
 }
 
-function* fetchDataFromServer(): Generator {
+function* requestLogout() {
+  const responseToken = yield call(api.tokens);
+  const token = responseToken.data.query.tokens.csrftoken;
+
+  const responseLogout = yield api.logout({ token });
+  return responseLogout;
+}
+
+function* requestClientLogin() {
+  const responseLoginToken = yield call(api.tokens, { type: 'login' });
+  const loginToken = responseLoginToken.data.query.tokens.logintoken;
+
+  const responseClientLogin = yield api.clientLogin({
+    loginToken,
+    username: 'Pereslavtsev',
+    password: 'wikipedia',
+    loginReturnUrl: 'http://localhost:3002'
+  });
+
+  return responseClientLogin;
+}
+
+function* fetchData(routine: Routine, mmm: any): Generator {
   try {
-    console.log(42343423)
-    yield put(clientLogin.request());
-    //yield call(fetchTokenSaga);
-    //const logintoken = yield select(state => state.tokens.data.logintoken);
-
-    const requestApi = {
-      method: 'POST',
-      protocol: 'https:',
-      hostname: 'ru.wikipedia.org',
-      path: '/w/api.php'
-    };
-    // @ts-ignore
-    const request = new ClientRequest(requestApi);
-    console.log(11111, request)
-
-    // @ts-ignore
-    request.on('response', data => { /* ... */ });
-    //
-    // let body = ''
-    // request.end(body);
-    // const response = yield api.post('', JSON.stringify({
-    //   action: 'clientlogin',
-    //   // username: 'Pereslavtsev',
-    //   // password: 'gfdgfdgdfgdfgdfgdfgdfgd',
-    //   // loginreturnurl: 'http://example.org/',
-    //   // logintoken: logintoken,
-    //   format: 'json'
-    // }));
-    //ield axios.post('https://ru.wikipedia.org/w/api.php', { action: 'login', format: 'json' });
-    // const response = yield fetch('https://ru.wikipedia.org/w/api.php', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     action: 'clientlogin',
-    //     username: 'Pereslavtsev',
-    //     password: 'gfgfdgfdgfdgdfg',
-    //     loginreturnurl: 'http://example.org/',
-    //     logintoken: logintoken,
-    //     format: 'json'
-    //   })
-    // });
-    yield put(clientLogin.success({}));
+    yield put(routine.request());
+    const xxx = yield call(mmm);
+    yield put(routine.success({}));
+    return yield xxx;
   } catch (error) {
-    // if request failed
-    //yield put(clientLogin.failure(error.message));
+    yield put(routine.failure(error.message));
   } finally {
-    // trigger fulfill action
-    //yield put(clientLogin.fulfill());
+    yield put(routine.fulfill());
   }
 }
 
-function* fetchTokenSaga() {
-  try {
-    yield put(fetchTokens.request());
-    const xxx = yield api.request({
-      params: {
-        action: 'query',
-        meta: 'tokens',
-        type: 'login',
-        format: 'json'
-      }
-    });
-    yield put(fetchTokens.success(xxx.data));
-  } catch (error) {
-    yield put(fetchTokens.failure(error.message));
-  } finally {
-    yield put(fetchTokens.fulfill());
-  }
+function* requestZZZ(): Generator {
+  const response = yield call(fetchData, clientLogin, requestClientLogin);
+}
+
+function* requestYYY(): Generator {
+  const response = yield call(fetchData, logout, requestLogout);
 }
 
 export default function* rootSaga() {

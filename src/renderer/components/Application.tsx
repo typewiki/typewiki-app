@@ -33,10 +33,8 @@ function onChange(newValue: any) {
 import { ContextMenuTarget, Menu, MenuItem } from '@blueprintjs/core';
 import { Header } from './Header';
 import store from '../store';
-import { clientLogin } from '../routines';
+import { clientLogin, logout } from '../routines';
 import { connect } from 'react-redux';
-
-const queryString = require('query-string');
 
 @ContextMenuTarget
 class RightClickMe extends React.Component<{}, {}> {
@@ -60,16 +58,14 @@ class RightClickMe extends React.Component<{}, {}> {
   }
 }
 
-import fetch from 'electron-fetch'
+import axios from 'axios';
 
 // @ts-ignore
-const Application = ({ clientLogin }) => {
+const Application = ({ clientLogin, logout }) => {
   const [code, setCode] = useState(`function add(a, b) {
   return a + b;
 }
 `);
-
-  const action = (type: any) => store.dispatch({ type });
 
   return (
     <div>
@@ -98,43 +94,13 @@ const Application = ({ clientLogin }) => {
       <Button
         icon="add"
         onClick={() => {
-          const requestApi = {
-            method: 'POST',
-            protocol: 'https:',
-            hostname: 'ru.wikipedia.org',
-            path: '/w/api.php',
-          };
-
-          let body = ''
-
-          const { remote } = require('electron');
-          const request = remote.net.request(requestApi);
-
-
-          request.on('response', response => {
-            console.log(`STATUS: ${response.statusCode}`);
-            console.log(`HEADERS: ${JSON.stringify(response.headers)}`);
-            response.on('end', () => {
-              console.log('No more data in response.');
-              console.log({ body })
-            });
-            response.on('data', chunk => {
-              console.log(`BODY: ${chunk}`);
-              body += chunk.toString();
-            });
-          });
-          request.write(queryString.stringify({ action: 'clientlogin', format: 'json' }));
-          request.end();
-
+          logout();
         }}
       />
       <Button
         icon="remove"
         onClick={() => {
-          // fetch('http://httpbin.org/post', { method: 'POST', body: 'format=json' })
-          //   .then(res => res.json())
-          //   .then(json => console.log(json))
-          //clientLogin();
+          clientLogin();
         }}
       />
     </div>
@@ -142,7 +108,8 @@ const Application = ({ clientLogin }) => {
 };
 
 const mapDispatchToProps = {
-  clientLogin
+  clientLogin,
+  logout
 };
 
 export default hot(
