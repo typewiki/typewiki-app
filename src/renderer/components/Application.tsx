@@ -59,6 +59,7 @@ class RightClickMe extends React.Component<{}, {}> {
 }
 
 import axios from 'axios';
+import History from '../modules/History';
 
 // @ts-ignore
 const Application = ({ clientLogin, logout }) => {
@@ -81,6 +82,7 @@ const Application = ({ clientLogin, logout }) => {
       {/*</ButtonGroup>*/}
       {/*<RightClickMe />*/}
       <Header />
+      <History />
       <AceEditor
         enableBasicAutocompletion={true}
         enableLiveAutocompletion={true}
@@ -90,6 +92,7 @@ const Application = ({ clientLogin, logout }) => {
         name="UNIQUE_ID_OF_DIV"
         editorProps={{ $blockScrolling: true }}
       />
+
 
       <Button
         icon="add"

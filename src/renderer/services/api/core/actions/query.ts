@@ -7,7 +7,13 @@ export type QueryRequestParams = Omit<QueryRequestData, 'action'>
 export class QueryRequestData extends BaseRequestData {
   action = 'query';
   format? = 'json';
-  meta: string;
+  prop?: string;
+  titles?: string;
+  rvProp?: string;
+  rvSlots?: string;
+  rvLimit?: number;
+  formatVersion?: string;
+  meta?: string;
 
   constructor(opts: QueryRequestParams) {
     super();
