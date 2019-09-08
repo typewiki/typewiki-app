@@ -5,11 +5,11 @@ import isEmpty from 'lodash-es/isEmpty';
 import { DateTime } from 'luxon';
 
 export interface UserTooltipContentProps {
-  username: string;
+  user: any;
   loading?: boolean;
 }
 
-export const UserTooltipContent: React.FC<UserTooltipContentProps> = ({ user, loading }: any) => {
+export const UserTooltipContent: React.FC<UserTooltipContentProps> = ({ user, loading }) => {
   if (!user || loading) {
     return (
       <div style={{ margin: '1em auto', textAlign: 'center' }}>

@@ -3,7 +3,7 @@ import * as api from '../services/api/index';
 import { put, takeLatest, all, fork, call, select } from 'redux-saga/effects';
 import { clientLogin, logout, fetchRevisions, fetchUsers } from '../routines';
 import { Routine } from 'redux-saga-routines';
-import { Simulate } from 'react-dom/test-utils';
+import * as prettyBytes from 'pretty-bytes';
 
 function* requestWatcherSaga(): Generator {
   yield takeLatest(clientLogin.TRIGGER, requestZZZ);
@@ -24,7 +24,20 @@ function* requestRev() {
   const responseToken = yield call(api.query, {
     prop: 'revisions',
     titles: 'Камбоджа',
-    rvProp: 'ids|flags|timestamp|user|userid|comment|parsedcomment|tags|roles|sha1',
+    rvProp: [
+      'ids',
+      'flags',
+      'timestamp',
+      'user',
+      'userid',
+      'comment',
+      'parsedcomment',
+      'size',
+      'slotsize',
+      'tags',
+      'roles',
+      'sha1'
+    ],
     rvSlots: '*',
     rvLimit: 100,
     formatVersion: '2'

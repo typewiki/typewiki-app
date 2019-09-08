@@ -2,12 +2,11 @@ import axios, { AxiosRequestConfig } from 'axios';
 import isEmpty from 'lodash-es/isEmpty';
 import * as queryString from 'query-string';
 import { transformParams } from './helpers';
-import { BaseRequestData } from './base-request';
 
 export const client = axios.create({
   baseURL: 'https://ru.wikipedia.org/w/api.php',
   withCredentials: true,
-  transformRequest: (data: BaseRequestData) => {
+  transformRequest: (data: any) => {
     if (!isEmpty) {
       return data;
     }

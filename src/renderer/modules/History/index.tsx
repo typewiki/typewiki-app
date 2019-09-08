@@ -1,20 +1,16 @@
 import * as React from 'react';
 import { fetchRevisions } from '../../routines';
-import { hot } from 'react-hot-loader/root';
 import { connect } from 'react-redux';
-import { Classes, Colors, Icon, IconName, Intent, Position, Spinner, Tag, Tooltip } from '@blueprintjs/core';
+import { Classes, Colors, Icon, Position, Spinner, Tag, Tooltip } from '@blueprintjs/core';
 // @ts-ignore
 import { useTable } from 'react-table';
 import { IconNames } from '@blueprintjs/icons';
-
-import mapKeys from 'lodash-es/mapKeys';
-import { denormalize } from 'normalizr';
-import { revision } from '../../reducers/historyReducer';
 import { toArray } from 'lodash-es';
 import { DateTime } from 'luxon';
 import UserTooltipContainer from './containers/UserTooltipContainer';
+import HistoryNavbarContainer from './containers/HistoryNavbarContainer';
 
-export const History: React.FC = ({ fetchRevisions, revisions }: any) => {
+export const History: React.FC = ({ fetchRevisions, revisions, loading }: any) => {
   const renderTag = (tag: string) => {
     switch (tag) {
       case 'mw-undo':
@@ -46,7 +42,33 @@ export const History: React.FC = ({ fetchRevisions, revisions }: any) => {
                   </Tooltip>
                 ))}
               </span>
-              {value.comment}
+
+              {value.comment || (
+                <em className={Classes.TEXT_DISABLED}>отстувствует описание правки</em>
+              )}
+              {value.minor && (
+                <span style={{ marginLeft: 5 }}>
+                  <Tooltip
+                    className={Classes.TOOLTIP_INDICATOR}
+                    position={Position.BOTTOM_LEFT}
+                    content="Малая правка"
+                  >
+                    <strong>м.</strong>
+                  </Tooltip>
+                </span>
+              )}
+            </span>
+          );
+        }
+      },
+      {
+        Header: 'Размер',
+        accessor: (data: any) => data,
+        Cell: ({ cell: { value } }: any) => {
+          console.log(value);
+          return (
+            <span style={{ whiteSpace: 'nowrap', float: 'right' }}>
+              {value.size.toLocaleString()} {value.slotsize}
             </span>
           );
         }
@@ -92,50 +114,61 @@ export const History: React.FC = ({ fetchRevisions, revisions }: any) => {
 
   React.useEffect(() => {
     console.log(3233);
-    !revisions && fetchRevisions();
+    !revisions && !loading && fetchRevisions();
   });
   console.log(5555, toArray(revisions));
   return (
     <>
       <div className="bp3-dark" style={{ background: Colors.DARK_GRAY3 }}>
-        <table
-          {...getTableProps()}
-          style={{ color: Colors.DARK_GRAY3, width: '100%' }}
-          className="bp3-html-table bp3-html-table-bordered bp3-html-table-condensed bp3-html-table-striped bp3-interactive bp3-small"
-        >
-          <thead>
-            {headerGroups.map((headerGroup: any) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column: any) => (
-                  <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            {rows.map(
-              (row: any, i: number) =>
-                prepareRow(row) || (
-                  <tr {...row.getRowProps()}>
-                    {row.cells.map((cell: any) => {
-                      return (
-                        <td key={i} {...cell.getCellProps()}>
-                          {cell.render('Cell')}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                )
-            )}
-          </tbody>
-        </table>
+        <HistoryNavbarContainer />
+        {loading ? (
+          <div style={{ padding: '3em 0', textAlign: 'center' }}>
+            <p>
+              <Spinner tagName="span" />
+            </p>
+            <p>Идет загрузка...</p>
+          </div>
+        ) : (
+          <table
+            {...getTableProps()}
+            style={{ color: Colors.DARK_GRAY3, width: '100%' }}
+            className="bp3-html-table bp3-html-table-bordered bp3-html-table-condensed bp3-html-table-striped bp3-interactive bp3-small"
+          >
+            <thead>
+              {headerGroups.map((headerGroup: any) => (
+                <tr {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column: any) => (
+                    <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
+            <tbody>
+              {rows.map(
+                (row: any, i: number) =>
+                  prepareRow(row) || (
+                    <tr {...row.getRowProps()}>
+                      {row.cells.map((cell: any) => {
+                        return (
+                          <td key={i} {...cell.getCellProps()}>
+                            {cell.render('Cell')}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  )
+              )}
+            </tbody>
+          </table>
+        )}
       </div>
     </>
   );
 };
 
-const mapStateToProps = ({ history: { revisions } }: any) => ({
-  revisions
+const mapStateToProps = ({ history: { revisions, loading } }: any) => ({
+  revisions,
+  loading
 });
 
 const mapDispatchToProps = {
