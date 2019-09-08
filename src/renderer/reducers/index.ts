@@ -4,6 +4,7 @@ import testReducer from './test';
 import authReducer from './authReducer';
 import tokensReducer from './tokensReducer';
 import historyReducer from './historyReducer';
+import usersReducer from './usersReducer';
 
 // import { CounterState, counterReducer } from './counterReducer';
 
@@ -14,6 +15,7 @@ export interface RootState {
   auth: any;
   tokens: any;
   history: any;
+  users: any;
 }
 
 export const rootReducer = combineReducers<RootState | undefined>({
@@ -23,4 +25,5 @@ export const rootReducer = combineReducers<RootState | undefined>({
   auth: authReducer,
   tokens: tokensReducer,
   history: historyReducer,
+  users: usersReducer,
 });

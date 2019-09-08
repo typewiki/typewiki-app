@@ -15,6 +15,11 @@ export class QueryRequestData extends BaseRequestData {
   formatVersion?: string;
   meta?: string;
 
+  list?: string;
+  usUsers?: string;
+  usUserIds?: string;
+  usProp?: string;
+
   constructor(opts: QueryRequestParams) {
     super();
     Object.assign(this, opts);

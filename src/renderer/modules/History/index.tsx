@@ -2,7 +2,7 @@ import * as React from 'react';
 import { fetchRevisions } from '../../routines';
 import { hot } from 'react-hot-loader/root';
 import { connect } from 'react-redux';
-import { Classes, Colors, Icon, IconName, Intent, Position, Tag, Tooltip } from '@blueprintjs/core';
+import { Classes, Colors, Icon, IconName, Intent, Position, Spinner, Tag, Tooltip } from '@blueprintjs/core';
 // @ts-ignore
 import { useTable } from 'react-table';
 import { IconNames } from '@blueprintjs/icons';
@@ -12,6 +12,7 @@ import { denormalize } from 'normalizr';
 import { revision } from '../../reducers/historyReducer';
 import { toArray } from 'lodash-es';
 import { DateTime } from 'luxon';
+import UserTooltipContainer from './containers/UserTooltipContainer';
 
 export const History: React.FC = ({ fetchRevisions, revisions }: any) => {
   const renderTag = (tag: string) => {
@@ -36,11 +37,13 @@ export const History: React.FC = ({ fetchRevisions, revisions }: any) => {
         Cell: ({ cell: { value } }: any) => {
           return (
             <span>
-               <span style={{ float: 'right' }}>
-                {value.tags.map((tag: string) => (
-                  <Tag minimal={true} interactive={true} style={{ marginLeft: 5 }}>
-                    {renderTag(tag)}
-                  </Tag>
+              <span style={{ float: 'right' }}>
+                {value.tags.map((tag: string, i: number) => (
+                  <Tooltip content={<>tooltip</>}>
+                    <Tag minimal={true} interactive={true} style={{ marginLeft: 5 }}>
+                      {renderTag(tag)}
+                    </Tag>
+                  </Tooltip>
                 ))}
               </span>
               {value.comment}
@@ -52,22 +55,11 @@ export const History: React.FC = ({ fetchRevisions, revisions }: any) => {
         Header: 'Участник',
         accessor: (data: any) => data,
         Cell: ({ cell: { value } }: any) => {
-          return   <Tooltip
-            className={Classes.TOOLTIP_INDICATOR}
-            content={<>
-            <p><strong className={Classes.TEXT_LARGE}>{value.user}</strong></p>
-              <ul className={Classes.LIST_UNSTYLED}>
-                <li>Зарегистрирован: <time>ggfgfgfdg</time></li>
-                <li>Зарегистрирован: <time>ggfgfgfdg</time></li>
-              </ul>
-
-            </>}
-            position={Position.BOTTOM}
-            lazy={true}
-            onOpening={() => console.log(value.userid)}
-          >
-            <span style={{whiteSpace: 'nowrap'}}>{value.user}</span>
-          </Tooltip>;
+          return (
+            <UserTooltipContainer user={value.user}>
+              <span style={{ whiteSpace: 'nowrap' }}>{value.user}</span>
+            </UserTooltipContainer>
+          );
         }
       },
       {
@@ -76,7 +68,11 @@ export const History: React.FC = ({ fetchRevisions, revisions }: any) => {
         minWidth: 300,
         Cell: ({ cell: { value } }: any) => {
           const xxx = DateTime.fromISO(value);
-          return <time style={{whiteSpace: 'nowrap'}}>{xxx.setLocale('ru').toLocaleString(DateTime.DATETIME_SHORT)}</time>;
+          return (
+            <time style={{ whiteSpace: 'nowrap' }}>
+              {xxx.setLocale('ru').toLocaleString(DateTime.DATETIME_SHORT)}
+            </time>
+          );
         }
       },
       {
@@ -85,7 +81,7 @@ export const History: React.FC = ({ fetchRevisions, revisions }: any) => {
         Cell: ({ cell: { value } }: any) => {
           return <span className="">{value}</span>;
         }
-      },
+      }
     ],
     []
   );
@@ -122,7 +118,11 @@ export const History: React.FC = ({ fetchRevisions, revisions }: any) => {
                 prepareRow(row) || (
                   <tr {...row.getRowProps()}>
                     {row.cells.map((cell: any) => {
-                      return <td key={i} {...cell.getCellProps()}>{cell.render('Cell')}</td>;
+                      return (
+                        <td key={i} {...cell.getCellProps()}>
+                          {cell.render('Cell')}
+                        </td>
+                      );
                     })}
                   </tr>
                 )
