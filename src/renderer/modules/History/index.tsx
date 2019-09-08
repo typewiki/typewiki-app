@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { fetchRevisions } from '../../routines';
 import { connect } from 'react-redux';
-import { Classes, Colors, Icon, Position, Spinner, Tag, Tooltip } from '@blueprintjs/core';
+import { Classes, Colors, Icon, Intent, Position, Spinner, Tag, Tooltip } from '@blueprintjs/core';
 // @ts-ignore
 import { useTable } from 'react-table';
 import { IconNames } from '@blueprintjs/icons';
 import { toArray } from 'lodash-es';
 import { DateTime } from 'luxon';
+import isEmpty from 'lodash-es/isEmpty';
 import UserTooltipContainer from './containers/UserTooltipContainer';
 import HistoryNavbarContainer from './containers/HistoryNavbarContainer';
 
-export const History: React.FC = ({ fetchRevisions, revisions, loading }: any) => {
+export const History: React.FC = ({ fetchRevisions, revisions, loading, error }: any) => {
   const renderTag = (tag: string) => {
     switch (tag) {
       case 'mw-undo':
@@ -66,10 +67,26 @@ export const History: React.FC = ({ fetchRevisions, revisions, loading }: any) =
         accessor: (data: any) => data,
         Cell: ({ cell: { value } }: any) => {
           console.log(value);
+          const difSize = !!revisions[value.parentid]
+            ? value.size - revisions[value.parentid].size
+            : 99999;
           return (
-            <span style={{ whiteSpace: 'nowrap', float: 'right' }}>
-              {value.size.toLocaleString()} {value.slotsize}
-            </span>
+            <>
+              <table>
+                <tr>
+                  <td>
+                    <span style={{ whiteSpace: 'nowrap' }}>
+                      {difSize > 0 && <Icon icon={IconNames.CARET_UP} intent={Intent.SUCCESS} />}
+                      {difSize < 0 && <Icon icon={IconNames.CARET_DOWN} intent={Intent.DANGER} />}
+                      {Math.abs(difSize)}
+                    </span>
+                  </td>
+                  <td align="right">
+                    <span style={{ whiteSpace: 'nowrap' }}>{value.size.toLocaleString()} </span>
+                  </td>
+                </tr>
+              </table>
+            </>
           );
         }
       },
@@ -77,11 +94,11 @@ export const History: React.FC = ({ fetchRevisions, revisions, loading }: any) =
         Header: 'Участник',
         accessor: (data: any) => data,
         Cell: ({ cell: { value } }: any) => {
-          return (
-            <UserTooltipContainer user={value.user}>
-              <span style={{ whiteSpace: 'nowrap' }}>{value.user}</span>
-            </UserTooltipContainer>
-          );
+          const renderName = () => <span style={{ whiteSpace: 'nowrap' }}>{value.user}</span>;
+          if (!value.userid) {
+            return renderName();
+          }
+          return <UserTooltipContainer user={value.user}>{renderName()}</UserTooltipContainer>;
         }
       },
       {
@@ -114,7 +131,7 @@ export const History: React.FC = ({ fetchRevisions, revisions, loading }: any) =
 
   React.useEffect(() => {
     console.log(3233);
-    !revisions && !loading && fetchRevisions();
+    isEmpty(revisions) && !loading && !error && fetchRevisions();
   });
   console.log(5555, toArray(revisions));
   return (
@@ -166,9 +183,10 @@ export const History: React.FC = ({ fetchRevisions, revisions, loading }: any) =
   );
 };
 
-const mapStateToProps = ({ history: { revisions, loading } }: any) => ({
+const mapStateToProps = ({ history: { revisions, loading, error } }: any) => ({
   revisions,
-  loading
+  loading,
+  error
 });
 
 const mapDispatchToProps = {

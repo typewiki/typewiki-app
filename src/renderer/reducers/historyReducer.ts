@@ -1,19 +1,11 @@
 import { fetchRevisions } from '../routines';
-import { normalize, schema } from 'normalizr';
+import merge from 'lodash-es/merge';
 
 const initialState = {
-  revisions: null,
+  revisions: {},
   loading: false,
   error: null
 };
-
-export const revision = new schema.Entity(
-  'revisions',
-  {},
-  {
-    idAttribute: value => value.revid
-  }
-);
 
 export default function historyReducer(state = initialState, action: any) {
   switch (action.type) {
@@ -23,22 +15,9 @@ export default function historyReducer(state = initialState, action: any) {
         loading: true
       };
     case fetchRevisions.SUCCESS:
-      //console.log('action.payload', action.payload);
-
-      const page = new schema.Entity(
-        'pages',
-        {
-          revisions: [revision]
-        },
-        {
-          idAttribute: value => value.pageid
-        }
-      );
-      const { entities: { revisions }, result } = normalize(action.payload.query, { pages: [page] });
-      console.log({ result })
       return {
         ...state,
-        revisions
+        revisions: merge(state.revisions, action.payload.revisions)
       };
     case fetchRevisions.FAILURE:
       return {
