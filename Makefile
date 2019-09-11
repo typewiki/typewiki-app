@@ -26,10 +26,10 @@ lint-fix:
 	@make ARGS="--fix" lint
 
 lint-styles:
-	stylelint **/*.*less
+	stylelint **/*.*scss
 
 lint-styles-fix:
-	stylelint **/*.*less --fix
+	stylelint **/*.*scss --fix
 
 package:
 	@make build

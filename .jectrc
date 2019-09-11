@@ -5,7 +5,6 @@
     "!<rootDir>/src/i18n/index.ts",
     "!<rootDir>/src/index.tsx",
     "!<rootDir>/src/react-app-env.d.ts",
-    "!<rootDir>/src/store/index.ts",
-    "!<rootDir>/src/theme/index.js"
+    "!<rootDir>/src/store/index.ts"
   ]
 }
