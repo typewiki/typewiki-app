@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { StoreProvider } from 'easy-peasy';
 import { ConnectedRouter } from 'connected-react-router';
 import { Provider } from 'react-redux';
 import { createMemoryHistory, MemoryHistory } from 'history';
@@ -15,15 +14,13 @@ describe('AppLayout component', () => {
     if (path) history.push(path);
     const store = createReduxStore();
     const app = (
-      <StoreProvider store={store}>
-        <Provider store={store as any}>
-          <ConnectedRouter history={history}>
-            <AppLayout>
-              <p data-tid="hello">Hello World!</p>
-            </AppLayout>
-          </ConnectedRouter>
-        </Provider>
-      </StoreProvider>
+      <Provider store={store as any}>
+        <ConnectedRouter history={history}>
+          <AppLayout>
+            <p data-tid="hello">Hello World!</p>
+          </AppLayout>
+        </ConnectedRouter>
+      </Provider>
     );
 
     return render(app);

@@ -1,12 +1,16 @@
 import { routerMiddleware } from 'connected-react-router';
-import { createStore, createTypedHooks } from 'easy-peasy';
+import createSagaMiddleware from 'redux-saga';
 import { createHashHistory } from 'history';
 import { createLogger } from 'redux-logger';
-import { createModel, RootModel } from './models';
+import { applyMiddleware, createStore, compose } from 'redux';
+
+import { createRootReducer, RootState } from './reducers';
+import rootSaga from './sagas/';
 
 export const history = createHashHistory();
+const sagaMiddleware = createSagaMiddleware();
 
-export const createReduxStore = () => {
+export const createReduxStore = (initialState?: RootState) => {
   // Redux store Configuration
   const middleware = [];
 
@@ -25,27 +29,22 @@ export const createReduxStore = () => {
   const router = routerMiddleware(history);
   middleware.push(router);
 
-  const models = createModel(history);
+  // Saga Middleware
+  middleware.push(sagaMiddleware);
 
-  // create easy-peasy store
-  return createStore(models, {
-    middleware,
-  });
+  const enhancer = compose(applyMiddleware(...middleware));
+  return createStore(createRootReducer(history), initialState, enhancer);
 };
 
 const store = createReduxStore();
+sagaMiddleware.run(rootSaga);
 
-// export hooks directly from the store to get proper type inference
-const typedHooks = createTypedHooks<RootModel>();
-export const { useStoreActions, useStoreDispatch, useStoreState } = typedHooks;
-
-// enable hot reload for models
+// enable hot reload for reducers
 if (process.env.NODE_ENV === 'development') {
   if ((module as any).hot) {
-    (module as any).hot.accept('./models', () => {
-      const models = createModel(history);
-      store.reconfigure(models);
-    });
+    (module as any).hot.accept('./reducers', () =>
+      store.replaceReducer(require('./reducers').rootReducer),
+    );
   }
 }
 
