@@ -1,3 +1,5 @@
 import { QueryPropBase } from '../../query';
 
-export type CirrusDoc = QueryPropBase<'cirrusdoc' | 'cd'>;
+export interface CirrusDoc extends QueryPropBase {
+  prop: 'cirrusdoc' | 'cd';
+}

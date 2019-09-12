@@ -72,6 +72,7 @@ typings/
 # production
 /build
 /dist
+/release
 
 # compiled by tsc from /src/electron/
 /public/main.js

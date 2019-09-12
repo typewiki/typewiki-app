@@ -29,6 +29,10 @@ export interface QueryListBase extends QueryBase {
   list: string;
 }
 
+export interface QueryMetaBase extends QueryBase {
+  meta: string;
+}
+
 export type Query = Categories | CategoryInfo | CirrusBuildDoc | CirrusDoc | PageViews;
 export type Direction = 'ascending' | 'descending';
 export type Values<T extends string> = T | T[];
