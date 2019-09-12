@@ -3,11 +3,22 @@
   "version": "0.1.1",
   "homepage": "https://typewiki.github.io",
   "description": "TypeWiki editor main app",
+  "license": "MIT",
+  "keywords": [
+    "mediawiki",
+    "electron",
+    "editor"
+  ],
   "author": {
     "name": "Vitaly Pereslavtsev",
     "email": "dev@pereslavtsev.com",
     "url": "https://pereslavtsev.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/typewiki/typewiki.git"
+  },
+  "bugs": "https://github.com/typewiki/typewiki/issues",
   "main": "public/main.js",
   "scripts": {
     "build": "make build",
@@ -58,6 +69,7 @@
     "@types/react-router-dom": "^4.3.5",
     "@types/redux-form": "^8.1.5",
     "@types/redux-logger": "^3.0.7",
+    "@types/redux-saga-routines": "^3.1.0",
     "@typescript-eslint/eslint-plugin": "2.2.0",
     "@typescript-eslint/parser": "2.2.0",
     "babel-plugin-import": "^1.12.1",
@@ -90,9 +102,11 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
     "redux": "^4.0.4",
+    "redux-actions": "^2.6.5",
     "redux-form": "^8.2.6",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.5",
+    "redux-saga-routines": "^3.2.1",
     "standard-version": "^7.0.0",
     "stylelint": "^10.1.0",
     "stylelint-config-prettier": "^5.2.0",
