@@ -1,4 +1,4 @@
-import { QueryBase } from '../query';
+import { QueryBase } from '../../query';
 
 export interface PageViews extends QueryBase {
   prop?: 'pageviews' | 'pvip';

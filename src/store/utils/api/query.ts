@@ -1,10 +1,11 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
-import { Categories } from './queries/categories';
-import { CategoryInfo } from './queries/category-info';
-import { PageViews } from './queries/page-views';
+import { Categories } from './queries/props/categories';
+import { CategoryInfo } from './queries/props/category-info';
+import { PageViews } from './queries/props/page-views';
+import { CirrusBuildDoc } from './queries/props/cirrus-build-doc';
+import { CirrusDoc } from './queries/props/cirrus-doc';
 
 export interface QueryBase {
-  list?: string;
   indexPageIds?: boolean;
   export?: boolean;
   exportNowrap?: boolean;
@@ -20,11 +21,19 @@ export interface QueryBase {
   convertTitles?: boolean;
 }
 
-export interface QueryPropBase<T extends string> extends QueryBase {
-  prop: T;
+export interface QueryPropBase extends QueryBase {
+  prop: string;
 }
 
-export type Query = Categories | CategoryInfo | PageViews;
+export interface QueryListBase extends QueryBase {
+  list: string;
+}
+
+export type Query = Categories | CategoryInfo | CirrusBuildDoc | CirrusDoc | PageViews;
+export type Direction = 'ascending' | 'descending';
+export type Values<T extends string> = T | T[];
+export type Limit = number | 'max';
+export type All = '*';
 
 export const query = (
   client: AxiosInstance,
