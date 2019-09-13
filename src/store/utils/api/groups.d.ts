@@ -1,0 +1,17 @@
+export type Group =
+  | 'bot'
+  | 'sysop'
+  | 'interface-admin'
+  | 'bureaucrat'
+  | 'steward'
+  | 'accountcreator'
+  | 'import'
+  | 'transwiki'
+  | 'ipblock-exempt'
+  | 'oversight'
+  | 'autopatrolled'
+  | 'uploader'
+  | 'checkuser'
+  | 'translationadmin'
+  | 'flow-bot'
+  | 'confirmed';

@@ -8,13 +8,18 @@ import {
   GlobalRenameStatus,
   GlobalUserInfo,
   LanguageInfo,
+  LanguageStats,
+  LinterStats,
   MessageGroupStats,
+  MessageGroups,
   MessageTranslations,
   Notifications,
   Oath,
   ReadingLists,
   SiteInfo,
+  SiteViews,
   Tokens,
+  UnreadNotificationPages,
   UserInfo,
   Wikibase,
 } from './meta';
@@ -29,12 +34,17 @@ export type QueryMeta =
   | GlobalRenameStatus
   | GlobalUserInfo
   | LanguageInfo
+  | LanguageStats
+  | LinterStats
   | MessageGroupStats
+  | MessageGroups
   | MessageTranslations
   | Notifications
   | Oath
   | ReadingLists
   | SiteInfo
+  | SiteViews
   | Tokens
+  | UnreadNotificationPages
   | UserInfo
   | Wikibase;

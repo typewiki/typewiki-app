@@ -4,6 +4,12 @@ import { CategoryInfo } from './queries/props/category-info';
 import { PageViews } from './queries/props/page-views';
 import { CirrusBuildDoc } from './queries/props/cirrus-build-doc';
 import { CirrusDoc } from './queries/props/cirrus-doc';
+import { QueryMeta } from './queries/query-meta';
+
+const xxx: QueryMeta = {
+  meta: 'am',
+  amCustomised: 'all',
+};
 
 export interface QueryBase {
   indexPageIds?: boolean;

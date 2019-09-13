@@ -1,10 +1,45 @@
-import { Limit, QueryPropBase } from '../../query';
+import { Limit, QueryPropBase, Values } from '../../query';
+import { Group } from '../../groups';
+import { Right } from '../../rights';
 
-export interface Contributors extends QueryPropBase<'contributors' | 'pc'> {
-  pcGroup: ('bot, sysop, interface-admin, bureaucrat, steward, accountcreator, import, transwiki, ipblock-exempt, oversight, autopatrolled, uploader, checkuser, translationadmin, flow-bot, confirmed')[];
-  pcExcludeGroup: ('')[];
-  pcRights?: 'apihighlimits, applychangetags, autoconfirmed, autocreateaccount, autopatrol, bigdelete, block, blockemail, bot, browsearchive, changetags, createaccount, createpage, createtalk, delete, deletechangetags, deletedhistory, deletedtext, deletelogentry, deleterevision, edit, editcontentmodel, editinterface, editprotected, editmyoptions, editmyprivateinfo, editmyusercss, editmyuserjson, editmyuserjs, editmyuserjsredirect, editmywatchlist, editsemiprotected, editsitecss, editsitejson, editsitejs, editusercss, edituserjson, edituserjs, hideuser, import, importupload, ipblock-exempt, managechangetags, markbotedits, mergehistory, minoredit, move, movefile, move-categorypages, move-rootuserpages, move-subpages, nominornewtalk, noratelimit, override-export-depth, pagelang, patrol, patrolmarks, protect, purge, read, reupload, reupload-own, reupload-shared, rollback, sendemail, siteadmin, suppressionlog, suppressredirect, suppressrevision, unblockself, undelete, unwatchedpages, upload, upload_by_url, userrights, userrights-interwiki, viewmyprivateinfo, viewmywatchlist, viewsuppressed, writeapi, spamblacklistlog, tboverride, tboverride-account, titleblacklistlog, gadgets-edit, gadgets-definition-edit, transcode-reset, transcode-status, urlshortener-manage-url, urlshortener-create-url, globalblock, globalblock-whitelist, globalblock-exempt, securepoll-create-poll, renameuser, nuke, torunblocked, skipcaptcha, override-antispoof, centralauth-merge, centralauth-unmerge, centralauth-lock, centralauth-oversight, globalgrouppermissions, globalgroupmembership, centralauth-rename, centralauth-usermerge, collectionsaveasuserpage, collectionsaveascommunitypage, repoadmin, codereview-use, codereview-add-tag, codereview-remove-tag, codereview-post-comment, codereview-set-status, codereview-signoff, codereview-associate, codereview-link-user, codereview-review-own, abusefilter-modify, abusefilter-log-detail, abusefilter-view, abusefilter-log, abusefilter-privatedetails, abusefilter-privatedetails-log, abusefilter-modify-restricted, abusefilter-revert, abusefilter-view-private, abusefilter-log-private, abusefilter-hidden-log, abusefilter-hide-log, abusefilter-modify-global, lqt-split, lqt-merge, lqt-react, massmessage, translate, translate-import, translate-manage, translate-messagereview, translate-groupreview, vipsscaler-test, flow-hide, flow-lock, flow-delete, flow-suppress, flow-edit-post, flow-create-board, usermerge, mwoauthproposeconsumer, mwoauthupdateownconsumer, mwoauthmanageconsumer, mwoauthsuppress, mwoauthviewsuppressed, mwoauthviewprivate, mwoauthmanagemygrants, oathauth-enable, oathauth-api-all, oathauth-disable-for-user, oathauth-view-log, newsletter-create, newsletter-delete, newsletter-manage, newsletter-restore, checkuser, checkuser-log, autoreviewrestore, stablesettings, review, unreviewedpages, movestable, validate, templateeditor, editeditorprotected, editextendedsemiprotected, extendedconfirmed, autoreviewprotected, viewdeletedfile, pagetranslation';
-  pcExcludeRights?: string;
-  pcLimit: Limit;
+/**
+ * Get the list of logged-in contributors
+ * and the count of anonymous contributors to a page.
+ */
+export interface Contributors extends QueryPropBase {
+  prop: 'contributors' | 'pc';
+
+  /**
+   * Only include users in the given groups.
+   * Does not include implicit
+   * or auto-promoted groups like *, user, or autoconfirmed.
+   */
+  pcGroup?: Values<Group>;
+
+  /**
+   * Exclude users in the given groups.
+   * Does not include implicit
+   * or auto-promoted groups like *, user, or autoconfirmed.
+   */
+  pcExcludeGroup?: Values<Group>;
+
+  /**
+   * Only include users having the given rights.
+   * Does not include rights granted by implicit
+   * or auto-promoted groups like *, user, or autoconfirmed.
+   */
+  pcRights?: Values<Right>;
+
+  /**
+   * Exclude users having the given rights.
+   * Does not include rights granted by implicit
+   * or auto-promoted groups like *, user, or autoconfirmed.
+   */
+  pcExcludeRights?: Values<Right>;
+
+  /** How many contributors to return. */
+  pcLimit?: Limit;
+
+  /** When more results are available, use this to continue. */
   pcContinue?: string;
 }

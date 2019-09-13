@@ -1,54 +1,21 @@
 import { All, Limit, QueryPropBase, Values } from '../../query';
 
+/** Find all pages that transclude the given pages. */
 export interface TranscludedIn extends QueryPropBase {
   prop: 'transcludedin' | 'ti';
-  tiProp: Values<'pageid' | 'title' | 'redirect'>;
-  tiNamespace:
-    | All
-    | Values<
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        90,
-        91,
-        92,
-        93,
-        100,
-        101,
-        102,
-        103,
-        104,
-        105,
-        106,
-        107,
-        486,
-        487,
-        828,
-        829,
-        1198,
-        1199,
-        2300,
-        2301,
-        2302,
-        2303,
-        2600,
-        5500,
-        5501
-      >;
+
+  /** Which properties to get. */
+  tiProp?: Values<'pageid' | 'title' | 'redirect'>;
+
+  /** Only include pages in these namespaces. */
+  tiNamespace: All | Values<string>;
+
+  /** Show only items that meet these criteria. */
   tiShow: Values<'redirect' | '!redirect'>;
-  tiLimit: Limit;
-  tiContinue: string;
+
+  /** How many to return. */
+  tiLimit?: Limit;
+
+  /** When more results are available, use this to continue. */
+  tiContinue?: string;
 }

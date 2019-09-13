@@ -9,9 +9,9 @@ export { GlobalUserInfo } from './global-user-info';
 export { LanguageInfo } from './language-info';
 export { LanguageStats } from './language-stats';
 export { LinterStats } from './linter-stats';
-
-export { MessageTranslations } from './message-translations';
 export { MessageGroupStats } from './message-group-stats';
+export { MessageGroups } from './message-groups';
+export { MessageTranslations } from './message-translations';
 export { Notifications } from './notifications';
 export { Oath } from './oath';
 export { ReadingLists } from './reading-lists';
