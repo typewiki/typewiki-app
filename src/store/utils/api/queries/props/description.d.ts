@@ -1,4 +1,4 @@
-import { QueryPropBase } from '../../query';
+import { QueryPropBase } from '../query';
 
 /**
  * Get a short description a.k.a. subtitle explaining what the target page is about.

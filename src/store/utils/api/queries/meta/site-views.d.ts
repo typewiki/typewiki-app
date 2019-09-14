@@ -1,4 +1,4 @@
-import { QueryMetaBase, Values } from '../../query';
+import { QueryMetaBase, Values } from '../query';
 
 /**
  * Shows sitewide pageview data

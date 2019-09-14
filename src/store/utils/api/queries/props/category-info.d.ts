@@ -1,4 +1,4 @@
-import { QueryPropBase } from '../../query';
+import { QueryPropBase } from '../query';
 
 /** Returns information about the given categories. */
 export interface CategoryInfo extends QueryPropBase {

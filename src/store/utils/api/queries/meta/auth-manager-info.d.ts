@@ -1,4 +1,4 @@
-import { QueryMetaBase, Values } from '../../query';
+import { QueryMetaBase, Values } from '../query';
 
 /** Retrieve information about the current authentication status. */
 export interface AuthManagerInfo extends QueryMetaBase {

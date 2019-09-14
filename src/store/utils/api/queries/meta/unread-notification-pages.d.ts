@@ -1,4 +1,4 @@
-import { Limit, QueryMetaBase, Values } from '../../query';
+import { Limit, QueryMetaBase, Values } from '../query';
 
 /** Get pages for which there are unread notifications for the current user. */
 export interface UnreadNotificationPages extends QueryMetaBase {

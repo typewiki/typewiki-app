@@ -1,4 +1,4 @@
-import { QueryMetaBase, Values } from '../../query';
+import { QueryMetaBase, Values } from '../query';
 
 /**
  * Return information about message groups.

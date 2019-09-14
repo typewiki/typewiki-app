@@ -1,4 +1,4 @@
-import { QueryMetaBase } from '../../query';
+import { QueryMetaBase } from '../query';
 
 /** Query all translations for a single message. */
 export interface MessageGroupStats extends QueryMetaBase {

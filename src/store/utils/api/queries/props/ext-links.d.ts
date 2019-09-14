@@ -1,4 +1,4 @@
-import { Limit, QueryPropBase, Values } from '../../query';
+import { Limit, QueryPropBase, Values } from '../query';
 
 /** Returns all external URLs (not interwikis) from the given pages. */
 export interface ExtLinks extends QueryPropBase {

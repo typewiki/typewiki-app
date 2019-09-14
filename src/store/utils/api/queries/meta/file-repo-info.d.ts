@@ -1,4 +1,4 @@
-import { QueryMetaBase, Values } from '../../query';
+import { QueryMetaBase, Values } from '../query';
 
 /** Return meta information about image repositories configured on the wiki. */
 export interface FileRepoInfo extends QueryMetaBase {

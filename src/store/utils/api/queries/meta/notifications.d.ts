@@ -1,4 +1,4 @@
-import { Limit, QueryMetaBase, Values } from '../../query';
+import { Limit, QueryMetaBase, Values } from '../query';
 
 /** Get notifications waiting for the current user. */
 export interface Notifications extends QueryMetaBase {

@@ -1,4 +1,4 @@
-import { QueryMetaBase } from '../../query';
+import { QueryMetaBase } from '../query';
 
 /** Get information about what languages the user knows */
 export interface Babel extends QueryMetaBase {

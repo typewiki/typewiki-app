@@ -1,4 +1,4 @@
-import { Direction, Limit, QueryMetaBase } from '../../query';
+import { Direction, Limit, QueryMetaBase } from '../query';
 
 /**
  * List or filter the user's reading lists and show metadata about them.

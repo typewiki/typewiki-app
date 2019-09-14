@@ -1,24 +1,43 @@
-import { All, Direction, Limit, QueryPropBase, Values } from '../../query';
+import { AllValues, Direction, Limit, QueryPropBase, Values } from '../query';
 
 /** Returns file information for stashed files. */
 export interface StashImageInfo extends QueryPropBase {
   prop: 'stashimageinfo' | 'sii';
 
-  /** Show templates in these namespaces only. */
-  siiFileKey: All | Values<string>;
+  /** Key that identifies a previous upload that was stashed temporarily. */
+  siiFileKey: Values<string>;
 
-  /** How many templates to return. */
-  tlLimit?: Limit;
-
-  /** When more results are available, use this to continue. */
-  tlContinue?: string;
+  /** Which file information to get. */
+  siiProp?: Values<
+    | 'timestamp'
+    | 'canonicaltitle'
+    | 'url'
+    | 'size'
+    | 'dimensions'
+    | 'sha1'
+    | 'mime'
+    | 'thumbmime'
+    | 'metadata'
+    | 'commonmetadata'
+    | 'extmetadata'
+    | 'bitdepth'
+    | 'badfile'
+  >;
 
   /**
-   * Only list these templates.
-   * Useful for checking whether a certain page uses a certain template.
+   * If siiprop=url is set, a URL to an image scaled to this width will be returned.
+   * For performance reasons if this option is used,
+   * no more than 50 scaled images will be returned.
    */
-  tlTemplates: Values<string>;
+  siiUrlWidth?: number;
 
-  /** The direction in which to list. */
-  tlDir?: Direction;
+  /** Similar to siiurlwidth. */
+  siiUrlHeight: number;
+
+  /**
+   * A handler specific parameter string.
+   * For example, PDFs might use page15-100px.
+   * siiurlwidth must be used and be consistent with siiurlparam.
+   */
+  siiUrlParam?: string;
 }

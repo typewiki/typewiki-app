@@ -1,11 +1,11 @@
-import { All, QueryMetaBase, Values } from '../../query';
+import { AllValues, QueryMetaBase, Values } from '../query';
 
 /** Return messages from this site. */
 export interface AllMessages extends QueryMetaBase {
   meta: 'allmessages' | 'am';
 
   /** Which messages to output. * (default) means all messages. */
-  amMessages: All | Values<string>;
+  amMessages: AllValues | Values<string>;
 
   /** Which properties to get. */
   amProp: Values<string>;

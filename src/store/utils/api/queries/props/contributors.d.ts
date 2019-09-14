@@ -1,4 +1,4 @@
-import { Limit, QueryPropBase, Values } from '../../query';
+import { Limit, QueryPropBase, Values } from '../query';
 import { Group } from '../../groups';
 import { Right } from '../../rights';
 

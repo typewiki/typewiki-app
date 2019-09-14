@@ -1,4 +1,4 @@
-import { All, Limit, QueryPropBase, Values } from '../../query';
+import { AllValues, Limit, QueryPropBase, Values } from '../query';
 
 /** Find all pages that use the given files. */
 export interface FileUsage extends QueryPropBase {
@@ -8,7 +8,7 @@ export interface FileUsage extends QueryPropBase {
   fuProp: Values<'pageid' | 'title' | 'redirect'>;
 
   /** Only include pages in these namespaces. */
-  fuNamespace: All | Values<string>;
+  fuNamespace: AllValues | Values<string>;
 
   /** Show only items that meet these criteria */
   fuShow: Values<'redirect' | '!redirect'>;

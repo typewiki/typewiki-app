@@ -1,4 +1,4 @@
-import { Limit, Values, QueryPropBase, Direction } from '../../query';
+import { Limit, Values, QueryPropBase, Direction } from '../query';
 
 /** List all categories the pages belong to. */
 export interface Categories extends QueryPropBase {

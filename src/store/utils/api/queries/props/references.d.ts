@@ -1,5 +1,12 @@
-import { QueryPropBase } from '../../query';
+import { QueryPropBase } from '../query';
 
-export interface References extends QueryPropBase<'references' | 'rf'> {
+/**
+ * Return a data representation of references
+ * associated with the given pages.
+ */
+export interface References extends QueryPropBase {
+  prop: 'references' | 'rf';
+
+  /** When more results are available, use this to continue. */
   rfContinue: string;
 }

@@ -1,4 +1,4 @@
-import { QueryMetaBase } from '../../query';
+import { QueryMetaBase } from '../query';
 
 /** Query language stats. */
 export interface LanguageStats extends QueryMetaBase {

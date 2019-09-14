@@ -1,4 +1,4 @@
-import { QueryMetaBase } from '../../query';
+import { QueryMetaBase } from '../query';
 
 /** Check to see if two-factor authentication (OATH) is enabled for a user. */
 export interface Oath extends QueryMetaBase {

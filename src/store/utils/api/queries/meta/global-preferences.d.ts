@@ -1,4 +1,4 @@
-import { QueryMetaBase, Values } from '../../query';
+import { QueryMetaBase, Values } from '../query';
 
 /**
  * Retrieve global preferences for the current user.

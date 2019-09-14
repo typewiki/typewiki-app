@@ -1,4 +1,4 @@
-import { QueryMetaBase } from '../../query';
+import { QueryMetaBase } from '../query';
 
 /** Show information about global renames that are in progress. */
 export interface GlobalRenameStatus extends QueryMetaBase {

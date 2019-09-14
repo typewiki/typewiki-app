@@ -1,4 +1,4 @@
-import { QueryMetaBase, Values } from '../../query';
+import { QueryMetaBase, Values } from '../query';
 
 /** Get a summary of logged API feature usages for a user agent. */
 export interface FeatureUsage extends QueryMetaBase {

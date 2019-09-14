@@ -1,4 +1,4 @@
-import { Limit, QueryPropBase, Values } from '../../query';
+import { Limit, QueryPropBase, Values } from '../query';
 
 /** Returns file information and upload history. */
 export interface ImageInfo extends QueryPropBase {

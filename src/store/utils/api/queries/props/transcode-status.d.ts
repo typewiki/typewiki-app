@@ -1,4 +1,4 @@
-import { QueryPropBase } from '../../query';
+import { QueryPropBase } from '../query';
 
 /** Get transcode status for a given file page. */
 export interface TranscodeStatus extends QueryPropBase {

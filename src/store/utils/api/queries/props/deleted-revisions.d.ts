@@ -1,19 +1,18 @@
 import { AllValues, Limit, QueryPropBase, Values } from '../query';
 
 /**
- * Get revision information.
+ * Get deleted revision information.
  *
  * May be used in several ways:
  *
- * 1. Get data about a set of pages (last revision), by setting titles or pageids
- * 2. Get revisions for one given page, by using titles or pageids with start, end, or limit.
- * 3. Get data about a set of revisions by setting their IDs with revids.
+ * 1. Get deleted revisions for a set of pages, by setting titles or pageids. Ordered by title and timestamp.
+ * 2. Get data about a set of deleted revisions by setting their IDs with revids. Ordered by revision ID.
  */
-export interface Revisions extends QueryPropBase {
-  prop: 'revisions' | 'rv';
+export interface DeletedRevisions extends QueryPropBase {
+  prop: 'deletedrevisions' | 'drv';
 
   /** Which properties to get for each revision */
-  rvProp: Values<
+  drvProp: Values<
     | 'ids'
     | 'flags'
     | 'timestamp'
@@ -37,14 +36,14 @@ export interface Revisions extends QueryPropBase {
    * If omitted, data from the main slot will be returned
    * in a backwards-compatible format.
    * */
-  rvSlots?: AllValues | Values<'main'>;
+  drvSlots?: AllValues | Values<'main'>;
 
   /**
    * Limit how many revisions will be returned.
    *
    * May only be used with a single page (mode #2).
    */
-  rvLimit?: Limit;
+  drvLimit?: Limit;
 
   /**
    * Start enumeration from this revision's timestamp.
@@ -52,7 +51,7 @@ export interface Revisions extends QueryPropBase {
    *
    * May only be used with a single page (mode #2).
    */
-  rvStartId?: number;
+  drvStartId?: number;
 
   /**
    * Stop enumeration at this revision's timestamp.
@@ -60,46 +59,46 @@ export interface Revisions extends QueryPropBase {
    *
    * May only be used with a single page (mode #2).
    */
-  rvEndId?: number;
+  drvEndId?: number;
 
   /**
    * From which revision timestamp to start enumeration.
    *
    * May only be used with a single page (mode #2).
    */
-  rvStart?: string;
+  drvStart?: string;
 
   /**
    * Enumerate up to this timestamp.
    *
    * May only be used with a single page (mode #2).
    */
-  rvEnd?: string;
+  drvEnd?: string;
 
   /**
    * In which direction to enumerate.
    *
    * May only be used with a single page (mode #2).
    */
-  rvDir?: 'newer' | 'older';
+  drvDir?: 'newer' | 'older';
 
   /**
    * Only include revisions made by user.
    *
    * May only be used with a single page (mode #2).
    */
-  rvUser?: string;
+  drvUser?: string;
 
   /**
    * Exclude revisions made by user.
    *
    * May only be used with a single page (mode #2).
    */
-  rvExcludeUser?: string;
+  drvExcludeUser?: string;
 
   /** Only list revisions tagged with this tag. */
-  rvTag?: string;
+  drvTag?: string;
 
   /** When more results are available, use this to continue. */
-  rvContinue?: string;
+  drvContinue?: string;
 }

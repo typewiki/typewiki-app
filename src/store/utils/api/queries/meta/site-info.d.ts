@@ -1,4 +1,4 @@
-import { QueryMetaBase, Values } from '../../query';
+import { QueryMetaBase, Values } from '../query';
 
 /** Return general information about the site */
 export interface SiteInfo extends QueryMetaBase {

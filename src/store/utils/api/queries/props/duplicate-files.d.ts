@@ -1,4 +1,4 @@
-import { Direction, Limit, QueryPropBase } from '../../query';
+import { Direction, Limit, QueryPropBase } from '../query';
 
 /**
  * List all files that are duplicates of the given files based on hash values.

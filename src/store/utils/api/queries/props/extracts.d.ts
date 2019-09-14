@@ -1,4 +1,4 @@
-import { Limit, QueryPropBase } from '../../query';
+import { Limit, QueryPropBase } from '../query';
 
 /** Returns plain-text or limited HTML extracts of the given pages. */
 export interface Extracts extends QueryPropBase {

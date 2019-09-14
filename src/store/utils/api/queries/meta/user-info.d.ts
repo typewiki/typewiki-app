@@ -1,4 +1,4 @@
-import { QueryMetaBase, Values } from '../../query';
+import { QueryMetaBase, Values } from '../query';
 
 /** Get information about the current user. */
 export interface UserInfo extends QueryMetaBase {

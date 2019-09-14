@@ -1,4 +1,4 @@
-import { Limit, QueryPropBase, Values } from '../../query';
+import { Limit, QueryPropBase, Values } from '../query';
 
 /** Extends imageinfo to include video source (derivatives) information. */
 export interface VideoInfo extends QueryPropBase {

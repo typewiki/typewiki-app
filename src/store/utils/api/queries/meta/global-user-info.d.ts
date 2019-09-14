@@ -1,4 +1,4 @@
-import { QueryMetaBase, Values } from '../../query';
+import { QueryMetaBase, Values } from '../query';
 
 /** Show information about a global user. */
 export interface GlobalUserInfo extends QueryMetaBase {

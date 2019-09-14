@@ -1,4 +1,4 @@
-import { All, Limit, QueryPropBase, Values } from '../../query';
+import { AllValues, Limit, QueryPropBase, Values } from '../query';
 
 /** Returns global image usage for a certain image. */
 export interface GlobalUsage extends QueryPropBase {
@@ -17,7 +17,7 @@ export interface GlobalUsage extends QueryPropBase {
   /**
    * Limit results to these namespaces.
    */
-  guNamespace?: All | Values<string>;
+  guNamespace?: AllValues | Values<string>;
 
   /** Limit results to these sites. */
   guSite: Values<string>;

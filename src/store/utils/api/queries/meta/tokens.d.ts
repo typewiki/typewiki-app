@@ -1,4 +1,4 @@
-import { QueryMetaBase, Values } from '../../query';
+import { QueryMetaBase, Values } from '../query';
 
 /** Gets tokens for data-modifying actions. */
 export interface Tokens extends QueryMetaBase {
