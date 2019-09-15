@@ -44,11 +44,9 @@ export class ApiService {
       meta: 'tokens',
       type: 'login',
     }).then(response => response.data.query.tokens.logintoken);
-    const { username, password } = credentials;
     return this.action('post', {
       loginToken,
-      username,
-      password,
+      ...credentials,
       action: 'clientlogin',
       loginReturnUrl: 'http://localhost:3002',
     }).then(response => {

@@ -5,7 +5,28 @@ import { ApiService } from '../utils/api';
 const api = new ApiService({});
 
 function* f() {
-  yield api.clientLogin({ username: 'Pereslavtsev', password: 'Zwikipedia271095' });
+  //yield api.clientLogin({ username: 'Pereslavtsev', password: 'Zwikipedia271095' });
+  yield api.query({
+    prop: 'revisions',
+    titles: 'Камбоджа',
+    rvProp: [
+      'ids',
+      'flags',
+      'timestamp',
+      'user',
+      'userid',
+      'comment',
+      'parsedcomment',
+      'size',
+      'slotsize',
+      'tags',
+      'roles',
+      'sha1',
+    ],
+    rvSlots: '*',
+    rvLimit: 100,
+    formatVersion: '2',
+  });
   yield put(routine.request(32131));
 }
 
