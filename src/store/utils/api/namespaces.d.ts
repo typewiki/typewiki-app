@@ -1,4 +1,4 @@
-import { Values } from './queries/query';
+import { Values } from './core/actions/query';
 
 export type Namespaces = Values<
   | 0

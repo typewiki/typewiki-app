@@ -1448,6 +1448,11 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/dateformat@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@types/dateformat/-/dateformat-3.0.0.tgz#d3cbfa8ac3789990592f3d9585331cdb2c5f979f"
+  integrity sha512-4N/J/ISasvUYOPnr5gfYRp+YYmPhHqkAyUgP9T9/HQHFoIfjU53lt3jaX67VuTvhpF5WsyNlCcEFbpI3spdxEA==
+
 "@types/debug@^4.1.4":
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/@types/debug/-/debug-4.1.4.tgz#56eec47706f0fd0b7c694eae2f3172e6b0b769da"
@@ -2387,6 +2392,15 @@ aws-sign2@~0.7.0:
 aws4@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.8.0.tgz#f0e003d9ca9e7f59c7a508945d7b2ef9a04a542f"
+
+axios-logger@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/axios-logger/-/axios-logger-2.1.0.tgz#1e9c47e302cc4d94fb9873a7d4882d9a5d4e1eda"
+  integrity sha512-o3PH+nh8G3WYuJ1TFiNQl4FsKoqkLrj/w1oo9QCXpCkbEMjzaBuy97mbDhi8eW7tfNq5Vj8dJX+Ulg0nC3JIgA==
+  dependencies:
+    "@types/dateformat" "^3.0.0"
+    chalk "^2.4.1"
+    dateformat "^3.0.3"
 
 axios@^0.19.0:
   version "0.19.0"
@@ -4731,7 +4745,7 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
 
-dateformat@^3.0.0:
+dateformat@^3.0.0, dateformat@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-3.0.3.tgz#a6e37499a4d9a9cf85ef5872044d62901c9889ae"
 
