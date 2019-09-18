@@ -5,7 +5,6 @@ import {
   waitForElement,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
-import { StoreProvider } from 'easy-peasy';
 import { ConnectedRouter } from 'connected-react-router';
 import { Provider } from 'react-redux';
 import { createMemoryHistory } from 'history';
@@ -17,13 +16,11 @@ describe('Counter component', () => {
   const renderComponent = () => {
     const store = createReduxStore();
     const app = (
-      <StoreProvider store={store}>
-        <Provider store={store as any}>
-          <ConnectedRouter history={createMemoryHistory()}>
-            <Counter />
-          </ConnectedRouter>
-        </Provider>
-      </StoreProvider>
+      <Provider store={store as any}>
+        <ConnectedRouter history={createMemoryHistory()}>
+          <Counter />
+        </ConnectedRouter>
+      </Provider>
     );
 
     return render(app);

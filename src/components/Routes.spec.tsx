@@ -1,5 +1,4 @@
 import React from 'react';
-import { StoreProvider } from 'easy-peasy';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router';
 import { render } from '@testing-library/react';
@@ -12,13 +11,11 @@ describe('App container', () => {
   const renderComponent = (route: string) => {
     const store = createReduxStore();
     const routes = (
-      <StoreProvider store={store}>
-        <Provider store={store as any}>
-          <MemoryRouter initialEntries={[route]}>
-            <Routes />
-          </MemoryRouter>
-        </Provider>
-      </StoreProvider>
+      <Provider store={store as any}>
+        <MemoryRouter initialEntries={[route]}>
+          <Routes />
+        </MemoryRouter>
+      </Provider>
     );
 
     return render(routes);
